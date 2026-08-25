@@ -1,0 +1,6 @@
+interface:
+  display_name: "Simplify firmware"
+  short_description: "Clarify MCU C without changing behavior"
+  default_prompt: "Use $code-simplification-embedded to simplify the firmware that just changed, without changing behavior."
+policy:
+  allow_implicit_invocation: false

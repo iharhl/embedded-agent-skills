@@ -1,0 +1,6 @@
+interface:
+  display_name: "Embedded review"
+  short_description: "Read-only review of firmware diffs"
+  default_prompt: "Use $review-agent-embedded to review the uncommitted firmware diff."
+policy:
+  allow_implicit_invocation: false

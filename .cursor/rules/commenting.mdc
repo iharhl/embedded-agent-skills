@@ -1,0 +1,38 @@
+---
+description: Comments for non-trivial logic in firmware C
+globs: ["**/*.c", "**/*.h"]
+---
+
+# Commenting
+
+Comment non-trivial logic with `/* */`. Explain why it exists: constraints,
+edge cases, hardware limits, expected inputs. Do not restate the next line.
+Place the comment directly above the code (or trailing if it fits one line).
+State the implementation; do not contrast it with an alternative. Avoid using
+"X is not Y, but Z" or "This is done because X instead of Y" phrasing.
+
+```c
+/* BAD: restates the assignment */
+TIM16->PSC = 15;
+
+/* BAD: contrast phrasing */
+/* Prescaler is not 8; it is 16 so the tick is 1 MHz. */
+TIM16->PSC = 15;
+
+/* GOOD: why this value exists */
+/* 16 MHz / 16 = 1 MHz tick for microsecond delays. */
+TIM16->PSC = 15;
+```
+
+Avoid leaving comments that are only relevant to the narrow context of the
+fix performed.
+
+```c
+/* BAD: leftover from moving the define in this change */
+/* Was in flash_ll.h; IAP needed it so it lives here now. */
+#define FLASH_FW_PAGE0      (BL_SIZE / FLASH_PAGE_SIZE)
+
+/* GOOD: why this value exists */
+/* First page of the firmware slot. */
+#define FLASH_FW_PAGE0      (BL_SIZE / FLASH_PAGE_SIZE)
+```

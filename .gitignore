@@ -1,0 +1,17 @@
+.DS_Store
+*.swp
+*~
+.idea/
+.vscode/
+
+# Firmware artifacts if examples get added later
+build/
+out/
+*.o
+*.elf
+*.hex
+*.bin
+*.map
+*.lst
+*.a
+*.lib

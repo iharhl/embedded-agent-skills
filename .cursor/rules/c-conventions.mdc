@@ -1,0 +1,14 @@
+---
+description: C style for firmware sources and host tests
+globs: ["**/*.c", "**/*.h"]
+---
+
+# C conventions
+
+- Includes: `"local.h"` for project headers, `<stdint.h>` / `<stddef.h>` for
+  compiler headers. Host tests that `#include` a production `.c` must include
+  stub headers first so include guards shadow firmware headers.
+- Include guards: `FILENAME_H` is the first content. File-level comments go
+  inside the guard. Close with `#endif /* FILENAME_H */`.
+- Firmware uses `ptr == 0` (no `NULL`).
+- Unsigned literals take a `U` suffix. Signed `int` flags stay `0`.
