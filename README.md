@@ -13,6 +13,7 @@ Copy into a firmware repo, then tailor. Put project-only bullets there (`-nostdl
   review-agent-embedded/
   grilling-embedded/
   code-simplification-embedded/
+  memory-optimization-embedded/
 .cursor/rules/           # Cursor rules (.mdc); Codex does not load these
 .cursor-plugin/          # optional Cursor plugin manifest
 ```
@@ -33,6 +34,7 @@ In Cursor, the `.mdc` rules apply when matching `*.c` / `*.h` files are in conte
 - **review-agent-embedded.** Read-only review of a firmware diff. Sanity, defects, ISR/main races, stack/RAM/flash, duplication, peripheral edge cases, docs. Silicon-facing changes need the datasheet or reference manual. `/review-agent-embedded` or `$review-agent-embedded`.
 - **grilling-embedded.** Architecture interview before code. Rounds of frontier questions with a recommended answer on each, then a decision log. Skips settled low-level branches and can drill into application logic. `/grilling-embedded` or `$grilling-embedded`.
 - **code-simplification-embedded.** Clarify working C/C++ firmware without changing behavior, including timing, footprint, register order, and errata workarounds. `/code-simplification-embedded` or `$code-simplification-embedded`.
+- **memory-optimization-embedded.** Profile the image with size/map/disassembly, apply safe RAM and Flash cuts on the requested feature, and propose neighboring or whole-image wins. `/memory-optimization-embedded` or `$memory-optimization-embedded`.
 
 These are firmware-specific. For general agent workflow (how/why a subsystem works, review, verification), [pstack](https://github.com/cursor/plugins/tree/main/pstack) is a good companion in Cursor (`/add-plugin pstack`).
 
@@ -61,6 +63,7 @@ Add a rule as `.cursor/rules/my-rule.mdc` with `description` and either `alwaysA
 ## Acknowledgements
 
 `grilling-embedded` is adapted from Matt Pocock's [grill-me / grilling](https://github.com/mattpocock/skills/tree/main) skills.
+
 `code-simplification-embedded` is adapted from Addy Osmani's [code-simplification](https://github.com/addyosmani/agent-skills/tree/main) skill.
 
 ## License

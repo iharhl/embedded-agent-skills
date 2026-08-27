@@ -1,0 +1,6 @@
+interface:
+  display_name: "Optimize firmware memory"
+  short_description: "Shrink a feature's RAM and Flash from measured size"
+  default_prompt: "Use $memory-optimization-embedded to profile this feature and safely reduce its RAM and Flash use. Propose neighboring or whole-image wins; do not apply them unless asked."
+policy:
+  allow_implicit_invocation: false

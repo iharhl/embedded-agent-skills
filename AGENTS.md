@@ -24,7 +24,7 @@ Put it in a **rule** if it should constrain everyday edits (C style, comments). 
 Put it in a **skill** if it is a procedure, such as reviewing a diff, grilling a design, or simplifying working firmware.
 
 - `alwaysApply: true` only for constraints that belong in every firmware session. `commenting` and `c-conventions` use `globs` on `*.c` / `*.h`; they are not always-on. Link flags, libc policy, and allocator/`NULL` exceptions stay in the firmware tree.
-- Omit `disable-model-invocation` so the agent can attach a skill from context. Set it to `true` only for slash-only playbooks. `review-agent-embedded`, `grilling-embedded`, and `code-simplification-embedded` are slash-only. Each has `agents/openai.yaml` with `allow_implicit_invocation: false`.
+- Omit `disable-model-invocation` so the agent can attach a skill from context. Set it to `true` only for slash-only playbooks. `review-agent-embedded`, `grilling-embedded`, `code-simplification-embedded`, and `memory-optimization-embedded` are slash-only. Each has `agents/openai.yaml` with `allow_implicit_invocation: false`.
 
 ## Writing a skill
 
