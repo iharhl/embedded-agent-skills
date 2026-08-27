@@ -8,7 +8,7 @@ disable-model-invocation: true
 
 Your goal is to interview the user relentlessly about their embedded system
 architecture, resolving timing dependencies, memory boundaries, and failure modes
-before any code is written.
+(in the context of user-prompted idea) before any code is written.
 
 ## Infer the project
 
@@ -17,7 +17,7 @@ Never ask the user for a fact the repo or datasheet already states. If a fact is
 needed, inspect the environment:
 
 1. Read `CLAUDE.md`, `AGENTS.md` and `.cursor/rules/` if they exist.
-2. Skim `README.md` and `docs/` if present.
+2. Skim `README.md` and documentation (e.g., `docs/`) if present.
 3. Inspect existing code, linker scripts, and datasheets if reachable.
 4. Dispatch sub-agents to find facts if needed. Do not block the interview while a
    sub-agent runs - only the questions downstream of that fact should wait.

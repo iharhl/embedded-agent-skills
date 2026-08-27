@@ -28,8 +28,8 @@ Avoid leaving comments that are only relevant to the narrow context of the
 fix performed.
 
 ```c
-/* BAD: leftover from moving the define in this change */
-/* Was in flash_ll.h; IAP needed it so it lives here now. */
+/* BAD: leftover from moving the define in this change + "X is not Y, but Z" phrase that is very fix-contextual. */
+/* Was in flash_ll.h; IAP needed it so it lives here now. Bootloader product policy, not the flash LL. */
 #define FLASH_FW_PAGE0      (BL_SIZE / FLASH_PAGE_SIZE)
 
 /* GOOD: why this value exists */
