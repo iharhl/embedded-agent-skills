@@ -1,6 +1,6 @@
 interface:
   display_name: "Grilling (embedded)"
-  short_description: "Interview firmware architecture first"
+  short_description: "Interview user about their idea in context of firmware architecture"
   default_prompt: "Use $grilling-embedded to interrogate this firmware design before writing code."
 policy:
   allow_implicit_invocation: false

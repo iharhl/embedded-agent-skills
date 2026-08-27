@@ -1,0 +1,6 @@
+interface:
+  display_name: "Review (embedded)"
+  short_description: "Read-only review of firmware diffs"
+  default_prompt: "Use $review-embedded to review the uncommitted diff."
+policy:
+  allow_implicit_invocation: false

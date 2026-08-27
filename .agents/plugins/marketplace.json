@@ -1,0 +1,22 @@
+{
+  "name": "embedded-agent-skills",
+  "interface": {
+    "displayName": "Agent skills for embedded software"
+  },
+  "plugins": [
+    {
+      "name": "embedded-agent-skills",
+      "version": "0.1.0",
+      "description": "Agent skills for embedded software / firmware written in C/C++.",
+      "source": {
+        "source": "local",
+        "path": "./"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

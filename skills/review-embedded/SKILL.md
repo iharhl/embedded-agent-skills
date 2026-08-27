@@ -1,10 +1,10 @@
 ---
-name: review-agent-embedded
-description: Review changes in embedded firmware projects. Checks sanity and defects, complexity tradeoffs, duplication, edge cases, and documentation. Use when the user asks for a firmware review, or wants a reviewer agent on embedded C/C++.
+name: review-embedded
+description: Review changes in embedded firmware projects. Checks sanity and defects, complexity tradeoffs, duplication, edge cases, and documentation. Use when the user asks for a firmware review, or a review of embedded C/C++.
 disable-model-invocation: true
 ---
 
-# Review agent for embedded software
+# Review (embedded)
 
 Read-only review. Do not modify files, create commits, push branches, post review
 comments, or delegate the review to another agent.

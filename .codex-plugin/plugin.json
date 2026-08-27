@@ -1,0 +1,29 @@
+{
+  "name": "embedded-agent-skills",
+  "version": "0.1.0",
+  "description": "Agent skills for embedded software",
+  "author": {
+    "name": "Ihar Hlukhau",
+    "url": "https://github.com/iharhl"
+  },
+  "homepage": "https://github.com/iharhl/embedded-agent-skills",
+  "repository": "https://github.com/iharhl/embedded-agent-skills",
+  "license": "MIT",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Agent skills for embedded software",
+    "shortDescription": "Agent skills for embedded software / firmware written in C/C++.",
+    "longDescription": "Agent skills for embedded software / firmware written in C/C++ covering review, code simplification, grilling and memory optimization.",
+    "developerName": "Ihar Hlukhau",
+    "category": "Productivity",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Use $review-embedded to review the uncommitted firmware diff.",
+      "Use $grilling-embedded to interrogate this firmware design before writing code."
+    ]
+  }
+}
