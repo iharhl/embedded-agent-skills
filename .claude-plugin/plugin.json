@@ -1,7 +1,7 @@
 {
   "name": "embedded-agent-skills",
   "version": "0.1.0",
-  "description": "Agent skills for embedded software",
+  "description": "Agent skills for embedded software / firmware written in C/C++.",
   "author": {
     "name": "Ihar Hlukhau"
   },

@@ -1,6 +1,6 @@
 ---
 name: review-embedded
-description: Review changes in embedded firmware projects. Checks sanity and defects, complexity tradeoffs, duplication, edge cases, and documentation. Use when the user asks for a firmware review, or a review of embedded C/C++.
+description: Reviews uncommitted, commit, or merge-base firmware diffs. Checks ISR/main races, defects, qualitative resource signals, duplication, peripheral edge cases, and docs. Use when the user asks for a firmware review, or a review of embedded C/C++.
 disable-model-invocation: true
 ---
 
@@ -38,8 +38,11 @@ Walk the whole change against these questions. Then apply any extra focus the us
 1. Is implementation sane, has no defects or potential issues? Pay special attention
    to concurrency safety: race conditions between ISRs and main code, proper use of
    `volatile`, and critical sections.
-2. Is it optimal - are tradeoffs considered and is it too complex for the problem that is
-   being solved, and does it respect resource limits (Stack/RAM/Flash footprint)?
+2. Is it optimal - are tradeoffs considered and is it too complex for the problem that
+   is being solved? Does it respect resource limits? Flag Stack/RAM/Flash footprint problems
+   you can see in the diff: a new large static buffer, recursion, a fat struct passed by
+   value, a new `printf` or libc pull. Write a byte count only if you ran `size` or read a
+   map file for this build.
 3. Can it be flattened or organized in a better way (e.g., there is duplicate or
    similar logic in another method or file - can it be reconciled)?
 4. Are there edge cases worth addressing (e.g., peripheral initialization order,
@@ -106,5 +109,8 @@ After findings (or after `No findings.`), add a short overall:
 nothing useful to say.
 - Extra focus the user asked for, even if clean.
 - Material test gaps or leftover risk.
+- One-line handoffs when they apply: complexity or duplication to
+  `/code-simplification-embedded`; measured size work to
+  `/memory-optimization-embedded`.
 
 Do not close by offering to patch unless the user asked.

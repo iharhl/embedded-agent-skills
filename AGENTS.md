@@ -33,4 +33,4 @@ Put it in a **skill** if it is a procedure, such as reviewing a diff, grilling a
 1. Frontmatter `description` is third person, says what it does and when to use it, and includes the words people actually type.
 2. `SKILL.md` body stays under 500 lines. Link one level down to `references/`.
 3. Infer a firmware tree from `CLAUDE.md`, `AGENTS.md`, and `.cursor/rules/` if they exist. Follow those over the skill when they conflict.
-4. After adding a skill or rule, list it in `README.md`. Slash-only skills also need `agents/openai.yaml`.
+4. After adding a skill or rule, list it in `README.md`. Slash-only skills also need `disable-model-invocation: true` and `agents/openai.yaml`.

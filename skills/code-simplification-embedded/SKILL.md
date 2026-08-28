@@ -1,13 +1,13 @@
 ---
 name: code-simplification-embedded
-description: Simplifies embedded C/C++ firmware for clarity without changing behavior. Use when refactoring drivers, ISRs, HAL layers, or state machines that work but are hard to read, maintain, or extend. Use when reviewing firmware that has accumulated unnecessary complexity.
+description: Simplifies embedded C/C++ firmware for clarity without changing behavior. Use when refactoring drivers, ISRs, HAL layers, or state machines that work but are hard to read, maintain, or extend, or when review flagged unnecessary complexity.
 disable-model-invocation: true
 ---
 
 # Code simplification (embedded)
 
-Simplify firmware by reducing complexity while preserving exact behavior - functional and
-non-functional. The goal is not fewer lines; it's code that is easier to read, understand,
+Simplify firmware by reducing complexity while preserving exact behavior, functional and
+non-functional. The goal is not fewer lines; it is code that is easier to read, understand,
 modify, and debug. A refactor that produces identical outputs but grows the image past the
 flash budget, deepens the stack, or pushes an ISR past its latency budget is a regression,
 not a simplification.
@@ -27,10 +27,11 @@ not a simplification.
 - Related logic is copy-pasted across files.
 
 **Do not use** when:
-- Code is already clean and readable - don't simplify for the sake of it.
-- You don't understand what the code does yet - comprehend before you simplify.
+
+- Code is already clean and readable - do not simplify for the sake of it.
+- You do not understand what the code does yet - comprehend before you simplify.
 - The code is performance-critical and the "simpler" version would be measurably slower.
-- You're about to rewrite the module entirely - simplifying throwaway code wastes effort.
+- You are about to rewrite the module entirely - simplifying throwaway code wastes effort.
 - The code is timing-critical and hand-tuned (ISR prologues, bit-banged buses, control
   loops) - restructuring can change measured cycle counts.
 
@@ -38,7 +39,8 @@ not a simplification.
 
 ### 1. Preserve behavior
 
-Don't change what the code does - only how it expresses it. In embedded systems the observable contract includes:
+Don't change what the code does, only how it expresses it. In embedded systems the observable
+contract includes:
 
 - **Functional behavior:** outputs, side effects, error paths, edge cases
 - **Timing:** execution cycles, interrupt latency, determinism, jitter
@@ -64,7 +66,7 @@ BEFORE REMOVING ANYTHING "POINTLESS":
 ```
 
 When you find an undocumented workaround, the simplification is often adding the missing
-why-comment - not deleting the code:
+why-comment, not deleting the code:
 
 ```c
 /* KEEP - and document if the comment is missing:
@@ -73,11 +75,11 @@ why-comment - not deleting the code:
 (void)RCC->CFGR;
 ```
 
-### 3. Follow Project Conventions
+### 3. Follow project conventions
 
-Keep the code consistent with the codebase. Before simplifying study how neighboring
-drivers handle similar patterns. Match project's style for register access idioms, error
-handling patterns, naming conventions (prefixes, number postfix like `0U` ...), etc.
+Keep the code consistent with the codebase. Before simplifying, study how neighboring
+drivers handle similar patterns. Match the project's style for register access, error
+handling, and naming (prefixes, unsigned suffixes like `0U`, and so on).
 
 ### 4. Clarity over cleverness
 
@@ -86,10 +88,10 @@ to parse. Named guards and `static` helpers in the same file stay cheap if the c
 inline them.
 
 ```c
-// UNCLEAR: magic value - hard to verify this against the datasheet
-UART1->CR1 = 0x202C;
+/* UNCLEAR: magic value - hard to verify this against the datasheet */
+UART1->CR1 = 0x202CU;
 
-// CLEAR: bit names mirror the reference manual
+/* CLEAR: bit names mirror the reference manual */
 UART1->CR1 = USART_CR1_UE | USART_CR1_RXNEIE | USART_CR1_TE | USART_CR1_RE;
 ```
 
@@ -228,13 +230,14 @@ if (iap_listen(iap_forced ? 0U : IAP_LISTEN_MS)) {
 }
 ```
 
-### 3. Apply Changes Incrementally
+### 3. Apply changes incrementally
 
-Make one simplification, then run the static analysis and tests this tree already has (host
-Unity, on-target, or both). If tests fail, revert that step. Do not mix simplification with
-a feature or a bug fix in the same step unless the user asked for one patch.
+Make one simplification, then run the static analysis and tests this tree already has. If
+tests fail, revert that step. Do not mix simplification with a feature or a bug fix in the
+same step unless the user asked for one patch.
 
-If a pass would touch hundreds of lines, stop and split. Do not invent a new framework to "help."
+If a pass would touch hundreds of lines, stop and split. Do not invent a new framework to
+"help."
 
 ### 4. Verify the Result
 
@@ -288,5 +291,8 @@ After completing a simplification pass:
 - [ ] Timing-sensitive paths not affected
 - [ ] Simplified code follows project conventions (CLAUDE.md, AGENTS.md coding standard, HAL idiom, cursor rules, etc.)
 - [ ] No error handling removed or weakened
-- [ ] No dead code was left behind (unused imports, unreachable branches)
-- [ ] Diff is clean (no unrelated changes mixed in), reviewable and on-scope
+- [ ] No dead code left behind
+- [ ] Diff is clean, reviewable, and in scope
+
+If the "simplified" version is harder to understand, doesn't fit, or shifts measured timing
+or footprint without an explanation, revert. Not every simplification attempt succeeds.

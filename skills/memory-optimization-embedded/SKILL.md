@@ -1,6 +1,6 @@
 ---
 name: memory-optimization-embedded
-description: Optimize the memory footprint of a named function, feature, or module in embedded firmware. Builds the project, profiles it, then applies safe RAM and Flash cuts in that scope and proposes neighboring or whole-image wins. Use when the user asks to shrink a driver, ISR, function, or feature, free RAM, fit an image into a smaller part, or audit memory usage of embedded C/C++ software.
+description: Optimizes the memory footprint of a named function, feature, or module in embedded firmware. Builds the project, profiles it, then applies safe RAM and Flash cuts in that scope and proposes neighboring or whole-image wins. Use when the user asks to shrink a driver, ISR, function, or feature, free RAM, fit an image into a smaller part, or audit memory usage of embedded C/C++.
 disable-model-invocation: true
 ---
 

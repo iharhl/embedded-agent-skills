@@ -1,5 +1,5 @@
 ---
-description: C style for firmware sources and host tests
+description: Opinionated C style for firmware sources and host tests
 globs: ["**/*.c", "**/*.h"]
 ---
 

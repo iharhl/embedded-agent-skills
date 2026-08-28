@@ -1,6 +1,6 @@
 ---
 name: grilling-embedded
-description: Grill the user relentlessly about a plan, decision, or idea. Use when the user wants to stress-test their thinking, wants an architecture interview before coding, wants to interrogate a firmware design, or uses any 'grill' trigger phrases.
+description: Interview the user relentlessly about a plan, decision, or idea. Use when the user wants to stress-test their thinking, wants an architecture interview before coding, wants to interrogate a firmware design, or uses any 'grill' trigger phrases.
 disable-model-invocation: true
 ---
 
@@ -8,7 +8,7 @@ disable-model-invocation: true
 
 Your goal is to interview the user relentlessly about their embedded system
 architecture, resolving timing dependencies, memory boundaries, and failure modes
-(in the context of user-prompted idea) before any code is written.
+(in the context of the user-prompted idea) before any code is written.
 
 ## Infer the project
 
@@ -19,12 +19,24 @@ needed, inspect the environment:
 1. Read `CLAUDE.md`, `AGENTS.md` and `.cursor/rules/` if they exist.
 2. Skim `README.md` and documentation (e.g., `docs/`) if present.
 3. Inspect existing code, linker scripts, and datasheets if reachable.
-4. Dispatch sub-agents to find facts if needed. Do not block the interview while a
-   sub-agent runs - only the questions downstream of that fact should wait.
+4. Look facts up yourself. Dispatch a sub-agent if the host can run one in the
+   background; only questions that depend on that fact should wait. If the host
+   cannot run background sub-agents, look the fact up in this turn before asking
+   the user a decision.
+
+## Resolve the scope
+
+- If the user named a feature, driver, peripheral, or protocol, that is the
+  apply-scope. Grill that feature and only the hardware, timing, memory, faults,
+  etc. it actually touches.
+- Whole-product interview only for a greenfield system or when the user asks to
+  grill the architecture as a whole.
+- If they did not specify, take the feature or idea under discussion, not the
+  entire firmware tree.
 
 ## Grilling Protocol
 
-Interview the user relentlessly until you reach a shared understanding. Map this as a
+Interview the user relentlessly until the named scope is settled. Map this as a
 design tree: every decision branches into the decisions that hang off it.
 
 Work the tree in rounds. The frontier is every decision whose prerequisites are already
@@ -64,11 +76,13 @@ a shared understanding.
 
 ## Interrogation Branches
 
-The branches below are a structural guide, not a rigid exam. How deep you go into each is entirely dependent on the project's maturity.
+The branches below are a structural guide, not a rigid exam. How deep you go into each is entirely dependent on the project's maturity and the apply-scope.
 
 - For a bare-metal greenfield project, focus heavily on hardware, timing, and memory.
 - For a project using a mature BSP or RTOS, briefly validate the low-level setup, then
   pivot to grilling the application logic and system architecture.
+- For a named feature, skip whole-chip pinmux, clock trees, and buses the feature does
+  not touch.
 - Skip any branch that doesn't apply or was already answered by the inferred context;
   feel free to drill down into domain-specific application logic if the lower layers
   are already settled.
@@ -104,6 +118,10 @@ The branches below are a structural guide, not a rigid exam. How deep you go int
 
 - **Watchdog:** Reset strategy, who pets it, windowed refresh, heartbeat vs
   single main-loop kick.
+- **Boot / update / rollback:** How new firmware is loaded (IAP, MCUboot, vendor
+  bootloader), what happens on a failed or interrupted update, and the safe state
+  if the image is invalid. Do not expand this into a full security exam unless the
+  user asked.
 - **Fault handling:** Handler fallback, what gets logged, safe hardware state
   (pins, drivers, motors) after a panic.
 - **Diagnostics:** Trace (SWO, RTT, serial), logging vs latency, how you will
@@ -122,8 +140,8 @@ The branches below are a structural guide, not a rigid exam. How deep you go int
 
 ## When done
 
-The session is done when the frontier is empty: every applicable branch is visited,
-and nothing is left silently assumed.
+The session is done when the named scope is settled and the frontier is empty: every
+applicable branch is visited, and nothing is left silently assumed.
 
 When done, write a short Decision Log: each choice that was made, the recommendation
 you gave, and what was skipped as N/A. Do not start implementing from that log unless

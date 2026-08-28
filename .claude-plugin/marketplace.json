@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
   "name": "embedded-agent-skills",
-  "description": "Agent skills for embedded software",
+  "description": "Agent skills for MCU firmware",
   "owner": {
     "name": "Ihar Hlukhau",
     "url": "https://github.com/iharhl"
@@ -10,12 +10,14 @@
     {
       "name": "embedded-agent-skills",
       "source": "./",
-      "description": "Agent skills for embedded software / firmware written in C/C++.",
+      "description": "Agent skills for embedded software / MCU firmware in C/C++: review, design grilling, silicon-aware simplification, and measured memory cuts.",
       "category": "development",
       "keywords": [
         "skills",
         "embedded",
         "firmware",
+        "mcu",
+        "rtos",
         "review",
         "grilling",
         "optimization"

@@ -1,13 +1,13 @@
 {
   "name": "embedded-agent-skills",
   "interface": {
-    "displayName": "Agent skills for embedded software"
+    "displayName": "Agent skills for MCU firmware"
   },
   "plugins": [
     {
       "name": "embedded-agent-skills",
       "version": "0.1.0",
-      "description": "Agent skills for embedded software / firmware written in C/C++.",
+      "description": "Agent skills for embedded software / MCU firmware in C/C++: review, design grilling, silicon-aware simplification, and measured memory cuts.",
       "source": {
         "source": "local",
         "path": "./"
