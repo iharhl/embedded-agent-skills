@@ -10,7 +10,7 @@
     {
       "name": "embedded-agent-skills",
       "source": "./",
-      "description": "Agent skills for embedded software / MCU firmware in C/C++: review, design grilling, silicon-aware simplification, and measured memory cuts.",
+      "description": "Agent skills for embedded software / MCU firmware in C/C++: review, rethinking changes, design grilling, silicon-aware simplification, and measured memory cuts.",
       "category": "development",
       "keywords": [
         "skills",
@@ -19,7 +19,9 @@
         "mcu",
         "rtos",
         "review",
+        "rethink",
         "grilling",
+        "implement",
         "optimization"
       ]
     }

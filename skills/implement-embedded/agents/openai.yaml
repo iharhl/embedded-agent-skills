@@ -1,0 +1,6 @@
+interface:
+  display_name: "Implement (embedded)"
+  short_description: "Implement a discussed firmware plan"
+  default_prompt: "Use $implement-embedded to implement the discussed firmware plan."
+policy:
+  allow_implicit_invocation: false

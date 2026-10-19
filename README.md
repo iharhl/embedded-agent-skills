@@ -3,7 +3,7 @@
 Agent workflows and optional Cursor rules for MCU firmware in C/C++. Aimed at bare-metal and RTOS work. Most focus was given to C, C++ coverage is currently
 lacking and will be expanded in the future.
 
-Install them into a firmware repo so the agent there follows the same review, grilling, simplification, and memory procedures.
+Install them into a firmware repo so the agent there follows the same review, rethink, grilling, implementation, simplification, and memory procedures.
 
 ## Install
 
@@ -77,7 +77,9 @@ In Cursor, the `.mdc` rules apply when matching `*.c` / `*.h` files are in conte
 ```text
 skills/                  # source of truth (all agents)
   review-embedded/
+  rethink-embedded/
   grilling-embedded/
+  implement-embedded/
   code-simplification-embedded/
   memory-optimization-embedded/
 .cursor/rules/           # Cursor rules (.mdc); optional
@@ -96,7 +98,9 @@ skills/                  # source of truth (all agents)
 **Skills**
 
 - **review-embedded.** Read-only review of a firmware diff. Sanity, defects, ISR/main races, qualitative resource signals, duplication, peripheral edge cases, docs. Silicon-facing changes need the datasheet or reference manual. `/review-embedded` or `$review-embedded`.
+- **rethink-embedded.** Step back before building. Recovers the core idea behind the code a request touches, checks whether the request makes sense, fits, and whether the existing logic is sound, weighs simpler options including not doing it, then gives one verdict. Read-only. `/rethink-embedded` or `$rethink-embedded`.
 - **grilling-embedded.** Architecture interview before code, scoped to a named feature unless you ask for the whole product. Rounds of frontier questions with a recommended answer on each, then a decision log. `/grilling-embedded` or `$grilling-embedded`.
+- **implement-embedded.** Implement a settled firmware plan, then a subagent (your agent's default model, or the one you name) reviews and simplifies the diff against the plan, and the agent applies the findings worth keeping. `/implement-embedded` or `$implement-embedded`.
 - **code-simplification-embedded.** Clarify working C firmware without changing behavior, including timing, footprint, register order, and errata workarounds. `/code-simplification-embedded` or `$code-simplification-embedded`.
 - **memory-optimization-embedded.** Profile the image with size/map/disassembly, apply safe RAM and Flash cuts on the requested feature, and propose neighboring or whole-image wins. `/memory-optimization-embedded` or `$memory-optimization-embedded`.
 

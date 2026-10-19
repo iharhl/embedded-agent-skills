@@ -13,7 +13,7 @@
   "interface": {
     "displayName": "Agent skills for MCU firmware",
     "shortDescription": "Agent skills for MCU firmware in C/C++.",
-    "longDescription": "Agent skills for embedded software / firmware written in C/C++: review, design grilling, silicon-aware simplification, and measured memory cuts.",
+    "longDescription": "Agent skills for embedded software / firmware written in C/C++: review, rethinking changes, design grilling, silicon-aware simplification, and measured memory cuts.",
     "developerName": "Ihar Hlukhau",
     "category": "Productivity",
     "capabilities": [
@@ -23,7 +23,9 @@
     ],
     "defaultPrompt": [
       "Use $review-embedded to review the uncommitted firmware diff.",
+      "Use $rethink-embedded to evaluate whether this firmware change makes sense before implementing it.",
       "Use $grilling-embedded to interrogate this firmware design before writing code.",
+      "Use $implement-embedded to implement the discussed firmware plan.",
       "Use $code-simplification-embedded to simplify working firmware.",
       "Use $memory-optimization-embedded to measure and cut RAM and Flash in the named feature."
     ]
